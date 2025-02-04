@@ -1,0 +1,20 @@
+{
+    "name": "schmosbyy/ai-companion",
+    "description": "AI Companion for your Laravel App",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Schmosbyy\\AiCompanion\\": "src/"
+        }
+    },
+
+    "authors": [
+        {
+            "name": "schmosbyy",
+            "email": "sakaarpoply@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^10.0"
+    }
+}
