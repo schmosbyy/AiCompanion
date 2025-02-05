@@ -7,5 +7,10 @@
 </head>
 <body>
 <h1>Welcome to the Home Page from the Laravel Package!</h1>
+@csrf
+<form method="POST" action="{{route('handle.input')}}">
+    <label>Enter Prompt?<input></label>
+    <button type="submit">Submit</button>
+</form>
 </body>
 </html>

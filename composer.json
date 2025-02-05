@@ -15,7 +15,8 @@
         }
     ],
     "require": {
-        "illuminate/support": ">=9.0"
+        "illuminate/support": ">=9.0",
+        "illuminate/http": ">=9.0"
     },
     "extra": {
         "laravel": {
