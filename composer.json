@@ -16,5 +16,12 @@
     ],
     "require": {
         "illuminate/support": ">=9.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Schmosbyy\\AiCompanion\\AiServiceProvider"
+            ]
+        }
     }
 }
