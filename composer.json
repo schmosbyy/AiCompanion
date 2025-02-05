@@ -16,7 +16,8 @@
     ],
     "require": {
         "illuminate/support": ">=9.0",
-        "illuminate/http": ">=9.0"
+        "illuminate/http": ">=9.0",
+        "ext-json": "*"
     },
     "extra": {
         "laravel": {
