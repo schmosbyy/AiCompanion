@@ -12,7 +12,7 @@ class AiServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
 
         // Load Views
-        $this->loadViewsFrom(__DIR__ . '/Resources/views', 'yourpackage');
+        $this->loadViewsFrom(__DIR__ . '/Resources/views', 'ai-companion');
     }
 
     public function register()
