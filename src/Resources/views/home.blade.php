@@ -92,7 +92,7 @@
 </head>
 <body>
 
-<h1>AI Search Interface</h1>
+<h1>AI Companion</h1>
 
 <div class="form-container">
     @csrf
