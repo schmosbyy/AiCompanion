@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Search Interface</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,6 +90,7 @@
             border-top: 1px solid #ddd;
         }
     </style>
+
 </head>
 <body>
 
@@ -125,14 +127,26 @@
             </ul>
         </div>
     @elseif(isset($queryResult))
-        <div class="query-result">
-            <strong>Query Result:</strong>
-            <ul>
-                <li>{!! $queryResult !!}</li>
-            </ul>
-        </div>
+        @if(Str::contains($queryResult, 'javascript'))
+            @php
+                $updatedQueryResult = preg_replace('/javascript/i', '', $queryResult);
+            @endphp
+
+            {{-- If the response contains JavaScript, inject it into the page --}}
+            <div id="chart-container">
+                <canvas id="myChart">
+                    <script>
+                        {!! $updatedQueryResult !!}
+                    </script>
+                </canvas>
+            </div>
+        @else
+            {{-- Otherwise, display the result as-is (for tables or other HTML) --}}
+            <div class="query-result">
+                {!! $queryResult !!}
+            </div>
+        @endif
     @endif
 </div>
-
 </body>
 </html>

@@ -19,13 +19,14 @@ class AiController extends Controller
         $sqlOutput = $this->executeSQLQuery($generatedSQLQuery);
         $formattedOutput = $this->formatWithLLM($sqlOutput, $prompt);
 
-        //dump($prompt,$schemaContext,$sqlOutput, $formattedOutput);
+        dump($prompt,$schemaContext,$sqlOutput, $formattedOutput);
 
         $formattedOutput = $formattedOutput ?: ["No SQL Data returned!"];
 
         return view('ai-companion::home', [
             "user_prompt"=>$prompt,
             "response" => "The generated SQL is: " . $generatedSQLQuery,
+            "sqlOutput" => json_encode($sqlOutput),
             "queryResult" => $formattedOutput
         ]);
     }
@@ -40,8 +41,20 @@ class AiController extends Controller
 
     private function buildFormatPrompt(string $jsonData, string $userPrompt): string
     {
-        return "Format this data as an HTML table. Make do with all the columns provided.
-                Here is the data: $jsonData";
+        return "Given the following JSON data, determine the most appropriate visualization type (bar chart, pie chart, line chart, or table) based on the structure and values of the data.
+
+    Rules:
+    - Use a **table** only if the data is mostly textual or lacks numerical aggregations.
+    - Use a **bar chart** if comparing categorical values with numerical counts.
+    - Use a **pie chart** if there are a few categorical values that sum to a whole.
+    - Use a **line chart** for trends over time.
+
+    Respond with:
+    - The best visualization type.
+    - A corresponding **Chart.js** configuration (only for bar chart, pie chart, or line chart).
+    - If a table is the best option, return the data as an HTML table.
+
+    JSON Data: " . json_encode($jsonData);
     }
 
     public function executeSQLQuery(string $query)
@@ -127,9 +140,9 @@ class AiController extends Controller
 
     public function getResponseFromLLM(mixed $prompt)
     {
-        ini_set('max_execution_time', 300); // Handle timeout issue
+        ini_set('max_execution_time', 600); // Handle timeout issue
         //command to run on a custom portOLLAMA_HOST=127.0.0.1:11435 ollama serve
-        $response = Http::post('http://127.0.0.1:11435/api/generate', [
+        $response = Http::timeout(600)->post('http://127.0.0.1:11435/api/generate', [
             'model' => 'qwen2.5-coder:14b',
             'prompt' => $prompt,
             'stream' => false
