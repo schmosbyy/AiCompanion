@@ -13,6 +13,14 @@ class AiServiceProvider extends ServiceProvider
 
         // Load Views
         $this->loadViewsFrom(__DIR__ . '/Resources/views', 'ai-companion');
+
+        // Publish the config file so users can modify it if needed
+        $this->publishes([
+            __DIR__ . '/../config/ai.php' => config_path('ai.php'),
+        ], 'config');
+
+        // Merge config to provide default values
+        $this->mergeConfigFrom(__DIR__ . '/../config/ai.php', 'ai');
     }
 
     public function register()

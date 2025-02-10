@@ -57,14 +57,18 @@ class AiController extends Controller
     JSON Data: " . json_encode($jsonData);
     }
 
+
+
     public function executeSQLQuery(string $query)
     {
         try {
-            if (stripos($query, 'SELECT') !== 0) {
+            $query = trim($query);
+            if (!preg_match('/^\s*SELECT\s+/i', $query) || preg_match('/\b(INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|CREATE|REPLACE|EXEC|MERGE|CALL|GRANT|REVOKE)\b/i', $query)) {
                 return "Only SELECT queries are allowed.";
             }
 
-            return DB::connection('vendor_project')->select($query); // Execute query
+            return DB::connection('vendor_project')->select(DB::raw($query));
+
         } catch (\Exception $e) {
             return "Error executing query: " . $e->getMessage();
         }
@@ -140,10 +144,10 @@ class AiController extends Controller
 
     public function getResponseFromLLM(mixed $prompt)
     {
-        ini_set('max_execution_time', 600); // Handle timeout issue
-        //command to run on a custom portOLLAMA_HOST=127.0.0.1:11435 ollama serve
-        $response = Http::timeout(600)->post('http://127.0.0.1:11435/api/generate', [
-            'model' => 'qwen2.5-coder:14b',
+        ini_set('max_execution_time', config('ai.timeout'));
+
+        $response = Http::timeout(config('ai.timeout'))->post(config('ai.api_url') . '/api/generate', [
+            'model' => config('ai.model'),
             'prompt' => $prompt,
             'stream' => false
         ]);

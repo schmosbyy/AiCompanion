@@ -131,8 +131,6 @@
             @php
                 $updatedQueryResult = preg_replace('/javascript/i', '', $queryResult);
             @endphp
-
-            {{-- If the response contains JavaScript, inject it into the page --}}
             <div id="chart-container">
                 <canvas id="myChart">
                     <script>
@@ -141,7 +139,6 @@
                 </canvas>
             </div>
         @else
-            {{-- Otherwise, display the result as-is (for tables or other HTML) --}}
             <div class="query-result">
                 {!! $queryResult !!}
             </div>
