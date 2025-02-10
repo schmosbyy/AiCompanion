@@ -3,7 +3,6 @@
 namespace Schmosbyy\AiCompanion;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
 class AiServiceProvider extends ServiceProvider
 {
     public function boot()

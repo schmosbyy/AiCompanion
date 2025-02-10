@@ -19,8 +19,6 @@ class AiController extends Controller
         $sqlOutput = $this->executeSQLQuery($generatedSQLQuery);
         $formattedOutput = $this->formatWithLLM($sqlOutput, $prompt);
 
-        dump($prompt,$schemaContext,$sqlOutput, $formattedOutput);
-
         $formattedOutput = $formattedOutput ?: ["No SQL Data returned!"];
 
         return view('ai-companion::home', [
@@ -67,7 +65,7 @@ class AiController extends Controller
                 return "Only SELECT queries are allowed.";
             }
 
-            return DB::connection('vendor_project')->select(DB::raw($query));
+            return DB::connection('vendor_project')->select($query);
 
         } catch (\Exception $e) {
             return "Error executing query: " . $e->getMessage();
