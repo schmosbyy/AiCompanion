@@ -1,7 +1,6 @@
 # AI Companion for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/schmosbyy/ai-companion.svg?style=flat-square)](https://packagist.org/packages/schmosbyy/ai-companion)  
-[![Total Downloads](https://img.shields.io/packagist/dt/schmosbyy/ai-companion.svg?style=flat-square)](https://packagist.org/packages/schmosbyy/ai-companion)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/schmosbyy/ai-companion.svg?style=flat-square)](https://packagist.org/packages/schmosbyy/ai-companion) [![Total Downloads](https://img.shields.io/packagist/dt/schmosbyy/ai-companion.svg?style=flat-square)](https://packagist.org/packages/schmosbyy/ai-companion)
 
 ## Overview
 
