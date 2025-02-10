@@ -2,6 +2,7 @@
     "name": "schmosbyy/ai-companion",
     "description": "AI Companion for your Laravel App",
     "type": "library",
+    "license": "proprietary",
     "autoload": {
         "psr-4": {
             "Schmosbyy\\AiCompanion\\": "src/"
