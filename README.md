@@ -8,6 +8,8 @@
 
 This package is designed for developers who want **AI-powered data querying** within their Laravel applications while ensuring **security** and **ease of use**.
 
+![AI Companion UI](./screenshot.png)
+
 ---
 
 ## Features
